@@ -1,0 +1,191 @@
+﻿<Window x:Class="NewDawn.Views.NewGameSetup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NewDawn"
+        mc:Ignorable="d"
+        Title="New Game" 
+        Height="1080"
+        Width="1920"
+        WindowState="Maximized"
+        >
+
+    <Grid Background="#FF504D8F">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="93"/>
+            <RowDefinition/>
+            <RowDefinition Height="130.04"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#FF413153" BorderBrush="#33000000" BorderThickness="0,0,0,1">
+            <Grid Margin="16,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="New Game"
+                           FontSize="36"
+                           FontWeight="SemiBold"
+                           VerticalAlignment="Center" Foreground="White"/>
+
+                <Button Grid.Column="1"
+                        x:Name="BtnExit"
+                        Content="Home"
+                        Width="120"
+                        Margin="12,8,0,9"
+                        Click="BtnExit_Click" Background="#FF2D1B4E" Foreground="Khaki"/>
+            </Grid>
+        </Border>
+
+        <!-- Main -->
+        <Grid Grid.Row="1" Margin="16,16,16,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="17"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left bar mode -->
+            <Border Grid.Column="0" Background="#FFF7FFF0" BorderBrush="#33000000" BorderThickness="1" CornerRadius="6" Padding="12">
+                <StackPanel>
+                    <TextBlock Text="Game Mode" FontSize="30" FontWeight="SemiBold" Margin="0,0,0,10"/>
+
+                    <RadioButton x:Name="RbKillCommander"
+                                 Content="Kill Commander"
+                                 GroupName="GameMode"
+                                 Margin="0,6"
+                                 FontSize="24"
+                                 Checked="GameMode_Checked"/>
+
+                    <TextBlock Text="Win if you destroy the opponent commander unit."
+                               Margin="22,0,0,12"                              
+                               Foreground="#66000000"
+                               FontSize="18"
+                               TextWrapping="Wrap"/>
+                    <TextBlock Margin="22,0,0,0"
+                               Foreground="#66000000"
+                               TextWrapping="Wrap"
+                               FontSize="18"
+                               Text="Contest flags to get points; first to 100 wins."/>
+                    <Separator Margin="0,18,0,18"/>
+
+                    <TextBlock Text="Units"
+                           FontSize="30"
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,10"/>
+
+                    <RadioButton x:Name="RbDefaultUnits"
+                         Content="Default Units (DefaultUnits.csv)"
+                         GroupName="UnitsMode"
+                         Margin="0,6"
+                         FontSize="22"
+                         IsChecked="True"
+                         Checked="UnitsMode_Checked"/>
+
+                    <RadioButton x:Name="RbCustomUnits"
+                         Content="Custom Units (from Saves/Units)"
+                         GroupName="UnitsMode"
+                         Margin="0,6"
+                         FontSize="22"
+                         Checked="UnitsMode_Checked"/>
+                    <!-- For seeing Save Unt's Template Folder for debugging (Remove Visibility = "Collapsed" to see) -->
+                    <TextBlock x:Name="TxtUnitsDir"
+                           Visibility="Collapsed"
+                           Foreground="#66000000"
+                           Margin="0,8,0,8"
+                           TextWrapping="Wrap"
+                           FontSize="16"/>
+
+                    <ComboBox x:Name="CmbUnitTemplates"
+                              IsEnabled="False"
+                              SelectionChanged="CmbUnitTemplates_SelectionChanged"
+                              DisplayMemberPath="DisplayName"
+                              Margin="0,4,0,0"
+                              Height="34"/>
+                    <TextBlock x:Name="TxtSelectedUnitTemplateTime"
+                               Foreground="#66000000"
+                               Margin="0,6,0,0"
+                               FontSize="16"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Right bar maps -->
+            <Border Grid.Column="2" Background="#FFF7FFF0" BorderBrush="#33000000" BorderThickness="1" CornerRadius="6" Padding="12">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Select Map" FontSize="30" FontWeight="SemiBold" Margin="0,0,0,10"/>
+
+                    <TextBlock Grid.Row="1"
+                               x:Name="TxtMapsDir"
+                               Foreground="#66000000"
+                               Margin="0,0,0,8"
+                               TextWrapping="Wrap"/>
+
+                    <ListBox Grid.Row="2" x:Name="LstMaps" SelectionChanged="LstMaps_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Text="{Binding DisplayName}" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Column="1"
+                                           Margin="12,0,0,0"
+                                           Foreground="#66000000"
+                                           Text="{Binding LastWriteTime, StringFormat={}{0:yyyy-MM-dd HH:mm}}"
+                                           HorizontalAlignment="Right"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Bottom -->
+        <Grid Grid.Row="2" Margin="16,10,16,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" x:Name="TxtStatus"
+                       VerticalAlignment="Center"
+                       Foreground="#66FFFFFF"
+                       FontSize="24"
+                       Text="Select a game mode and a map." Grid.ColumnSpan="2"/>
+
+            <Button x:Name="BtnPlay"
+                    Content="Play"
+                    FontSize="16"
+                    FontWeight="SemiBold"
+                    BorderThickness="1"
+                    Click="BtnPlay_Click" Background="#FFD84F43" Foreground="Khaki" Margin="1372,10,0,10">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.65"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

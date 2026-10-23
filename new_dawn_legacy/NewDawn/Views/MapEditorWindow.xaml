@@ -1,0 +1,100 @@
+﻿<Window x:Class="NewDawn.Views.MapEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NewDawn"
+        Title="Map Editor"
+        Width="1920" Height="1080"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized">
+    
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Top bar -->
+        <Border Grid.Row="0" Background="#FF5C39AB" Padding="10">
+            <DockPanel LastChildFill="False">
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
+                    <Button x:Name="BtnSave" Content="Save" Width="80" Margin="0,0,8,0" Click="BtnSave_Click" Background="#FF2D1B4E" Foreground="Khaki" BorderBrush="#FF707070"/>
+                    <Button x:Name="BtnLoad" Content="Load" Margin="0,0,8,0" Width="80" Click="BtnLoad_Click" Background="#FF2D1B4E" Foreground="Khaki"/>
+                    <Button x:Name="BtnHome" Height="40" Width="80" Margin="0,0,8,0"  Click="BtnHome_Click"  Content="Home" Background="#FF2D1B4E" Foreground="Khaki"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Margin="25,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="Map name:" VerticalAlignment="Center" Margin="0,0,6,0" Foreground="#FFF9F9F9"/>
+                    <TextBox x:Name="TxtMapName" Width="180"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Center">
+                    <TextBlock Text="Grid size:" VerticalAlignment="Center" Margin="0,0,6,0" Foreground="#FFFDFDFD"/>
+                    <TextBox x:Name="TxtGridW" Width="45" Text="12" Margin="0,0,6,0"/>
+                    <TextBlock Text="x" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                    <TextBox x:Name="TxtGridH" Width="45" Text="8" Margin="0,0,12,0"/>
+                    <Button Content="Create" Width="90" Click="BtnCreate_Click" Background="#FF2D1B4E" Foreground="Khaki"/>
+                </StackPanel>
+
+            </DockPanel>
+        </Border>
+
+        <!-- Main -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left: map list -->
+            <Border Grid.Column="0" Background="#FFDAA6FF" Padding="10">
+                <DockPanel>
+                    <TextBlock Text="Map list" FontWeight="Bold" Margin="0,0,0,10" DockPanel.Dock="Top"/>
+                    <ListBox x:Name="LstMaps" SelectionChanged="LstMaps_SelectionChanged" Background="#FFB0A2E6">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding DisplayName}" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{Binding LastSavedText}" FontSize="12" Opacity="0.8"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </Border>
+
+            <!-- Center: map canvas -->
+            <Border Grid.Column="1" Background="#FF614596" Padding="10">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Auto">
+                    <Canvas x:Name="MapCanvas" Background="#FFD3CBEA"/>
+                </ScrollViewer>
+            </Border>
+
+            <!-- Right: palette -->
+            <Border Grid.Column="2" Background="#FFA34ECC" Padding="10">
+                <DockPanel>
+                    <TextBlock Text="Palette" FontWeight="Bold" Margin="0,0,0,10" DockPanel.Dock="Top"/>
+
+                    <ListBox x:Name="LstPalette" SelectionChanged="LstPalette_SelectionChanged" Background="#FFBCB3E0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="0,4">
+                                    <Border Width="42" Height="42" BorderThickness="1" BorderBrush="#666" Margin="0,0,8,0">
+                                        <Image Source="{Binding Preview}" Stretch="UniformToFill"/>
+                                    </Border>
+                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </DockPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,23 @@
+﻿<Window x:Class="NewDawn.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NewDawn"
+        mc:Ignorable="d"
+        Title="NewDawn" Height="1080" Width="1920" WindowState="Maximized">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/UI/NewDawn_Title.png" 
+                        Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <Rectangle Fill="Black" Opacity="0.2"/>
+        <Button Content="New Game" HorizontalAlignment="Left" Height="79" Margin="92,563,0,0" VerticalAlignment="Top" Width="472" Click="BtnNewGame_Clicked" Background="#2D1B4E" Foreground="#F0E68C" FontSize="46"/>
+        <Button Content="Map Editor" HorizontalAlignment="Left" Height="57" Margin="166,738,0,0" VerticalAlignment="Top" Width="321" Click="BtnMapEditor_Clicked" Background="#2D1B4E" Foreground="#F0E68C" FontSize="32" />
+        <Button Content="Unit Editor" HorizontalAlignment="Left" Height="56" Margin="166,800,0,0" VerticalAlignment="Top" Width="320" Click="BtnUnitEditor_Clicked"  Background="#2D1B4E" Foreground="#F0E68C" FontSize="32"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Height="57" Margin="166,861,0,0" VerticalAlignment="Top" Width="321" Click="BtnExit_Clicked" Background="#2D1B4E" Foreground="#F0E68C" FontSize="32" />
+        <Button Content="How to Play" Click="BtnHowToPlay_Clicked"  Margin="166,677,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height ="56" Width="321" Background="#2D1B4E" Foreground="#F0E68C" FontSize="32" Cursor="Hand"/>
+    </Grid>
+</Window>

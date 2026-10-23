@@ -1,0 +1,15 @@
+﻿<Application x:Class="NewDawn.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NewDawn"
+             StartupUri="MainWindow.xaml"
+             ThemeMode="Light"
+    >
+    <!-- Add theme -->
+    <Application.Resources>
+    <Style TargetType="{x:Type Window}">
+            <Setter Property="Icon"
+                    Value="/Assets/UI/NewDawn_icon.ico"/>
+        </Style>
+    </Application.Resources>
+</Application>
