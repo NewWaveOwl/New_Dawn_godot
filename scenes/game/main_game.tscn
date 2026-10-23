@@ -1,6 +1,90 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3]
 
 [ext_resource type="Script" path="res://src/ui/MainGameScreen.cs" id="1_game"]
+[ext_resource type="Script" path="res://src/ui/GameMapCanvas.cs" id="2_qgbr3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7qhhq"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.38039216, 0.27058825, 0.5882353, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_noi7s"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.36078432, 0.22352941, 0.67058825, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2514"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.40392157, 0.4392157, 0.6784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpywg"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.1882353, 0, 0.28235295, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ef7fl"]
+bg_color = Color(0.40392157, 0.3647059, 0.5529412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_11nld"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.25490198, 0.1254902, 0.30588236, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qsdf0"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.16862746, 0.16862746, 0.16862746, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_25xmc"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.3882353, 0.1764706, 0.5411765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i2osx"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.64705884, 0.34117648, 0.83137256, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vde2q"]
+bg_color = Color(0.105882354, 0.30588236, 0.22745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cwfu"]
+bg_color = Color(0.30588236, 0.1254902, 0.105882354, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cn0rj"]
+bg_color = Color(0.29411766, 0.30588236, 0.105882354, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xgagw"]
+bg_color = Color(0.30588236, 0.105882354, 0.2901961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eixuh"]
+bg_color = Color(0.1764706, 0.105882354, 0.30588236, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v72ow"]
+bg_color = Color(0.1764706, 0.105882354, 0.30588236, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccb4r"]
+bg_color = Color(0.1764706, 0.105882354, 0.30588236, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_stils"]
+bg_color = Color(0.1764706, 0.105882354, 0.30588236, 1)
 
 [node name="MainGame" type="Control"]
 layout_mode = 3
@@ -10,3 +94,287 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_game")
+
+[node name="Background" type="PanelContainer" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7qhhq")
+
+[node name="Layout" type="VBoxContainer" parent="Background"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TopPanel" type="PanelContainer" parent="Background/Layout"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_noi7s")
+
+[node name="TopBar" type="HBoxContainer" parent="Background/Layout/TopPanel"]
+layout_mode = 2
+
+[node name="PlayerOneResources" type="HBoxContainer" parent="Background/Layout/TopPanel/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="PlayerOneTitle" type="Label" parent="Background/Layout/TopPanel/TopBar/PlayerOneResources"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Player 1"
+
+[node name="FuelTitle" type="Label" parent="Background/Layout/TopPanel/TopBar/PlayerOneResources"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Fuel:"
+
+[node name="P1Fuel" type="Label" parent="Background/Layout/TopPanel/TopBar/PlayerOneResources"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="AlloyTitle" type="Label" parent="Background/Layout/TopPanel/TopBar/PlayerOneResources"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Alloy:"
+
+[node name="P1Alloy" type="Label" parent="Background/Layout/TopPanel/TopBar/PlayerOneResources"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="TurnPanel" type="PanelContainer" parent="Background/Layout/TopPanel/TopBar"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p2514")
+
+[node name="TurnColumn" type="VBoxContainer" parent="Background/Layout/TopPanel/TopBar/TurnPanel"]
+layout_mode = 2
+
+[node name="TurnTitle" type="Label" parent="Background/Layout/TopPanel/TopBar/TurnPanel/TurnColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Turn:"
+horizontal_alignment = 1
+
+[node name="TurnPlayer" type="Label" parent="Background/Layout/TopPanel/TopBar/TurnPanel/TurnColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Player 1"
+
+[node name="PlayerTwoResources" type="HBoxContainer" parent="Background/Layout/TopPanel/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+alignment = 2
+
+[node name="PlayerTwoTitle" type="Label" parent="Background/Layout/TopPanel/TopBar/PlayerTwoResources"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Player 2"
+
+[node name="FuelTitle" type="Label" parent="Background/Layout/TopPanel/TopBar/PlayerTwoResources"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Fuel:"
+
+[node name="P2Fuel" type="Label" parent="Background/Layout/TopPanel/TopBar/PlayerTwoResources"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="AlloyTitle" type="Label" parent="Background/Layout/TopPanel/TopBar/PlayerTwoResources"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Alloy:"
+
+[node name="P2Alloy" type="Label" parent="Background/Layout/TopPanel/TopBar/PlayerTwoResources"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="Body" type="HBoxContainer" parent="Background/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="ShopPanel" type="PanelContainer" parent="Background/Layout/Body"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rpywg")
+
+[node name="ShopColumn" type="VBoxContainer" parent="Background/Layout/Body/ShopPanel"]
+layout_mode = 2
+
+[node name="ShopTitle" type="Label" parent="Background/Layout/Body/ShopPanel/ShopColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Unit's list"
+
+[node name="Shop" type="ItemList" parent="Background/Layout/Body/ShopPanel/ShopColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ef7fl")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="BuildingHint" type="Label" parent="Background/Layout/Body/ShopPanel/ShopColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Can only be placed near Engineer"
+autowrap_mode = 3
+
+[node name="MapPanel" type="PanelContainer" parent="Background/Layout/Body"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_11nld")
+
+[node name="GameScroll" type="ScrollContainer" parent="Background/Layout/Body/MapPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="GameCanvas" type="Control" parent="Background/Layout/Body/MapPanel/GameScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("2_qgbr3")
+
+[node name="BottomPanel" type="PanelContainer" parent="Background/Layout"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qsdf0")
+
+[node name="BottomBar" type="HBoxContainer" parent="Background/Layout/BottomPanel"]
+layout_mode = 2
+
+[node name="InfoPanel" type="PanelContainer" parent="Background/Layout/BottomPanel/BottomBar"]
+custom_minimum_size = Vector2(250, 150)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_25xmc")
+
+[node name="InfoColumn" type="VBoxContainer" parent="Background/Layout/BottomPanel/BottomBar/InfoPanel"]
+layout_mode = 2
+
+[node name="InfoTitle" type="Label" parent="Background/Layout/BottomPanel/BottomBar/InfoPanel/InfoColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Info"
+
+[node name="Info" type="Label" parent="Background/Layout/BottomPanel/BottomBar/InfoPanel/InfoColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+autowrap_mode = 3
+
+[node name="ActionPanel" type="PanelContainer" parent="Background/Layout/BottomPanel/BottomBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_i2osx")
+
+[node name="ActionButtons" type="HBoxContainer" parent="Background/Layout/BottomPanel/BottomBar/ActionPanel"]
+layout_mode = 2
+alignment = 1
+
+[node name="Move" type="Button" parent="Background/Layout/BottomPanel/BottomBar/ActionPanel/ActionButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_vde2q")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Move"
+
+[node name="Attack" type="Button" parent="Background/Layout/BottomPanel/BottomBar/ActionPanel/ActionButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_5cwfu")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Attack"
+
+[node name="Special" type="Button" parent="Background/Layout/BottomPanel/BottomBar/ActionPanel/ActionButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cn0rj")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Special"
+
+[node name="Cancel" type="Button" parent="Background/Layout/BottomPanel/BottomBar/ActionPanel/ActionButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_xgagw")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Cancel"
+
+[node name="TurnActions" type="VBoxContainer" parent="Background/Layout/BottomPanel/BottomBar"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+
+[node name="NextTurn" type="Button" parent="Background/Layout/BottomPanel/BottomBar/TurnActions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(232, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_eixuh")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Next turn"
+
+[node name="FileActions" type="HBoxContainer" parent="Background/Layout/BottomPanel/BottomBar/TurnActions"]
+layout_mode = 2
+
+[node name="Save" type="Button" parent="Background/Layout/BottomPanel/BottomBar/TurnActions/FileActions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_v72ow")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Save"
+
+[node name="Load" type="Button" parent="Background/Layout/BottomPanel/BottomBar/TurnActions/FileActions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ccb4r")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Load"
+
+[node name="Home" type="Button" parent="Background/Layout/BottomPanel/BottomBar/TurnActions/FileActions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_stils")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Home"
+
+[node name="StartHint" type="Control" parent="."]
+visible = false
+layout_mode = 0
+
+[node name="Message" type="Label" parent="StartHint"]
+layout_mode = 0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Start a match from New Game in the main menu."
+
+[node name="Home" type="Button" parent="StartHint"]
+layout_mode = 0
+offset_top = 50.0
+offset_right = 90.0
+offset_bottom = 92.0
+custom_minimum_size = Vector2(90, 42)
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.5490196, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_stils")
+text = "Home"

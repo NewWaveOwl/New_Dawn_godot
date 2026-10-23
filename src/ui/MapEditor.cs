@@ -21,102 +21,28 @@ public partial class MapEditor : Control
         GetWindow().Title = "Map Editor";
         if (!DisplayServer.GetName().Equals("headless"))
             GetWindow().Mode = Window.ModeEnum.Maximized;
-        BuildControls();
+        BindControls();
         BuildPalette();
         RefreshMapList();
         CreateNewMapFromUi();
     }
 
-    private static PanelContainer Panel(string color)
+    private void BindControls()
     {
-        var panel = new PanelContainer();
-        var style = new StyleBoxFlat { BgColor = new Color(color) };
-        style.ContentMarginLeft = style.ContentMarginRight = 10;
-        style.ContentMarginTop = style.ContentMarginBottom = 10;
-        panel.AddThemeStyleboxOverride("panel", style);
-        return panel;
-    }
-
-    private static void Button(HBoxContainer parent, string name, string text, Action action, int width = 80)
-    {
-        var button = new Godot.Button { Name = name, Text = text, CustomMinimumSize = new Vector2(width, 40) };
-        var style = new StyleBoxFlat { BgColor = new Color("2D1B4E"), BorderColor = new Color("707070") };
-        style.SetBorderWidthAll(1);
-        button.AddThemeStyleboxOverride("normal", style);
-        button.AddThemeColorOverride("font_color", new Color("F0E68C"));
-        parent.AddChild(button);
-        button.Pressed += action;
-    }
-
-    private static LineEdit Entry(HBoxContainer parent, string name, string text, int width)
-    {
-        var entry = new LineEdit { Name = name, Text = text, CustomMinimumSize = new Vector2(width, 0) };
-        parent.AddChild(entry);
-        return entry;
-    }
-
-    private void BuildControls()
-    {
-        var column = new VBoxContainer { Name = "Layout" };
-        column.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
-        column.AddThemeConstantOverride("separation", 0);
-        AddChild(column);
-        var toolbarPanel = Panel("5C39AB");
-        toolbarPanel.CustomMinimumSize = new Vector2(0, 70);
-        column.AddChild(toolbarPanel);
-        var toolbar = new HBoxContainer();
-        toolbar.AddThemeConstantOverride("separation", 8);
-        toolbarPanel.AddChild(toolbar);
-        Button(toolbar, "Save", "Save", SaveMap);
-        Button(toolbar, "Load", "Load", LoadMap);
-        Button(toolbar, "Home", "Home", () => {
+        _mapName = GetNode<LineEdit>("%MapName");
+        _gridW = GetNode<LineEdit>("%GridWidth");
+        _gridH = GetNode<LineEdit>("%GridHeight");
+        _maps = GetNode<ItemList>("%MapList");
+        _palette = GetNode<ItemList>("%Palette");
+        _canvas = GetNode<MapCanvas>("%MapCanvas");
+        GetNode<Button>("%Save").Pressed += SaveMap;
+        GetNode<Button>("%Load").Pressed += LoadMap;
+        GetNode<Button>("%Create").Pressed += CreateNewMapFromUi;
+        GetNode<Button>("%Home").Pressed += () => {
             GetWindow().Title = "NewDawn";
             GetTree().ChangeSceneToFile("res://scenes/menus/main_menu.tscn");
-        });
-        toolbar.AddChild(new Control { CustomMinimumSize = new Vector2(17, 0) });
-        toolbar.AddChild(new Label { Text = "Map name:" });
-        _mapName = Entry(toolbar, "MapName", "", 180);
-        toolbar.AddChild(new Control { SizeFlagsHorizontal = SizeFlags.ExpandFill });
-        toolbar.AddChild(new Label { Text = "Grid size:" });
-        _gridW = Entry(toolbar, "GridWidth", "12", 45);
-        toolbar.AddChild(new Label { Text = "x" });
-        _gridH = Entry(toolbar, "GridHeight", "8", 45);
-        Button(toolbar, "Create", "Create", CreateNewMapFromUi, 90);
-
-        var body = new HBoxContainer { SizeFlagsVertical = SizeFlags.ExpandFill };
-        body.AddThemeConstantOverride("separation", 0);
-        column.AddChild(body);
-        var left = Panel("DAA6FF");
-        left.CustomMinimumSize = new Vector2(240, 0);
-        body.AddChild(left);
-        var mapsColumn = new VBoxContainer();
-        left.AddChild(mapsColumn);
-        mapsColumn.AddChild(new Label { Text = "Map list", Modulate = Colors.Black });
-        _maps = new ItemList { Name = "MapList", SizeFlagsVertical = SizeFlags.ExpandFill };
-        _maps.AddThemeStyleboxOverride("panel", new StyleBoxFlat { BgColor = new Color("B0A2E6") });
-        _maps.AddThemeColorOverride("font_color", Colors.Black);
-        mapsColumn.AddChild(_maps);
+        };
         _maps.ItemSelected += index => _mapName.Text = Path.GetFileNameWithoutExtension(_mapFiles[index]);
-
-        var center = Panel("614596");
-        center.SizeFlagsHorizontal = SizeFlags.ExpandFill;
-        body.AddChild(center);
-        var scroll = new ScrollContainer { Name = "MapScroll" };
-        center.AddChild(scroll);
-        _canvas = new MapCanvas { Name = "MapCanvas" };
-        scroll.AddChild(_canvas);
-
-        var right = Panel("A34ECC");
-        right.CustomMinimumSize = new Vector2(200, 0);
-        body.AddChild(right);
-        var paletteColumn = new VBoxContainer();
-        right.AddChild(paletteColumn);
-        paletteColumn.AddChild(new Label { Text = "Palette", Modulate = Colors.Black });
-        _palette = new ItemList { Name = "Palette", SizeFlagsVertical = SizeFlags.ExpandFill,
-            FixedIconSize = new Vector2I(24, 24) };
-        _palette.AddThemeStyleboxOverride("panel", new StyleBoxFlat { BgColor = new Color("BCB3E0") });
-        _palette.AddThemeColorOverride("font_color", Colors.Black);
-        paletteColumn.AddChild(_palette);
         _palette.ItemSelected += index => {
             _selectedTerrain = (Tile.TerrainType)(int)_palette.GetItemMetadata((int)index);
             _canvas.SelectedTerrain = _selectedTerrain;

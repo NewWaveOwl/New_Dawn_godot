@@ -1,6 +1,117 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3]
 
 [ext_resource type="Script" path="res://src/ui/UnitEditor.cs" id="1_editor"]
+
+[sub_resource type="Theme" id="Theme_3wp82"]
+default_font_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkxkg"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.36078432, 0.22352941, 0.67058825, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s10vt"]
+bg_color = Color(0.1764706, 0.105882354, 0.30588236, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.53333336, 0.53333336, 0.53333336, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8wbr"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.85490197, 0.6509804, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndpyb"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.827451, 0.79607844, 0.91764706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_066b6"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.9098039, 0.9098039, 0.9098039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6kyhn"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.9098039, 0.9098039, 0.9098039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h1xaw"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.9098039, 0.9098039, 0.9098039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4j03e"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.9098039, 0.9098039, 0.9098039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20vpc"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.9098039, 0.9098039, 0.9098039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1kv1v"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.9098039, 0.9098039, 0.9098039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xfxuu"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.9098039, 0.9098039, 0.9098039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_beopq"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.9098039, 0.9098039, 0.9098039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1hpb"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+bg_color = Color(0.27450982, 0.15686275, 0.5411765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07tfa"]
+bg_color = Color(0.1764706, 0.105882354, 0.30588236, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.53333336, 0.53333336, 0.53333336, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m8sed"]
+bg_color = Color(0.1764706, 0.105882354, 0.30588236, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.53333336, 0.53333336, 0.53333336, 1)
 
 [node name="UnitEditor" type="Control"]
 layout_mode = 3
@@ -9,4 +120,167 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_3wp82")
 script = ExtResource("1_editor")
+
+[node name="Layout" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="Layout"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wkxkg")
+
+[node name="TitleBar" type="HBoxContainer" parent="Layout/Header"]
+layout_mode = 2
+
+[node name="Heading" type="Label" parent="Layout/Header/TitleBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Unit Editor"
+
+[node name="Home" type="Button" parent="Layout/Header/TitleBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 35)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_s10vt")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Home"
+
+[node name="Body" type="PanelContainer" parent="Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_j8wbr")
+
+[node name="TablePanel" type="PanelContainer" parent="Layout/Body"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ndpyb")
+
+[node name="TableScroll" type="ScrollContainer" parent="Layout/Body/TablePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Table" type="VBoxContainer" parent="Layout/Body/TablePanel/TableScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="TableHeader" type="HBoxContainer" parent="Layout/Body/TablePanel/TableScroll/Table"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="NameHeader" type="PanelContainer" parent="Layout/Body/TablePanel/TableScroll/Table/TableHeader"]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_066b6")
+
+[node name="Title" type="Label" parent="Layout/Body/TablePanel/TableScroll/Table/TableHeader/NameHeader"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "Unit Name"
+
+[node name="PriceHeader" type="PanelContainer" parent="Layout/Body/TablePanel/TableScroll/Table/TableHeader"]
+custom_minimum_size = Vector2(80, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6kyhn")
+
+[node name="Title" type="Label" parent="Layout/Body/TablePanel/TableScroll/Table/TableHeader/PriceHeader"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "Price"
+
+[node name="HPHeader" type="PanelContainer" parent="Layout/Body/TablePanel/TableScroll/Table/TableHeader"]
+custom_minimum_size = Vector2(60, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h1xaw")
+
+[node name="Title" type="Label" parent="Layout/Body/TablePanel/TableScroll/Table/TableHeader/HPHeader"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "HP"
+
+[node name="DamageHeader" type="PanelContainer" parent="Layout/Body/TablePanel/TableScroll/Table/TableHeader"]
+custom_minimum_size = Vector2(60, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4j03e")
+
+[node name="Title" type="Label" parent="Layout/Body/TablePanel/TableScroll/Table/TableHeader/DamageHeader"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "DMG"
+
+[node name="RangeHeader" type="PanelContainer" parent="Layout/Body/TablePanel/TableScroll/Table/TableHeader"]
+custom_minimum_size = Vector2(60, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_20vpc")
+
+[node name="Title" type="Label" parent="Layout/Body/TablePanel/TableScroll/Table/TableHeader/RangeHeader"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "Range"
+
+[node name="SpeedHeader" type="PanelContainer" parent="Layout/Body/TablePanel/TableScroll/Table/TableHeader"]
+custom_minimum_size = Vector2(60, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1kv1v")
+
+[node name="Title" type="Label" parent="Layout/Body/TablePanel/TableScroll/Table/TableHeader/SpeedHeader"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "Speed"
+
+[node name="ArmoredHeader" type="PanelContainer" parent="Layout/Body/TablePanel/TableScroll/Table/TableHeader"]
+custom_minimum_size = Vector2(80, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xfxuu")
+
+[node name="Title" type="Label" parent="Layout/Body/TablePanel/TableScroll/Table/TableHeader/ArmoredHeader"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "Armored"
+
+[node name="SpecialHeader" type="PanelContainer" parent="Layout/Body/TablePanel/TableScroll/Table/TableHeader"]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_beopq")
+
+[node name="Title" type="Label" parent="Layout/Body/TablePanel/TableScroll/Table/TableHeader/SpecialHeader"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "Special"
+
+[node name="Rows" type="VBoxContainer" parent="Layout/Body/TablePanel/TableScroll/Table"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Footer" type="PanelContainer" parent="Layout"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c1hpb")
+
+[node name="FileActions" type="HBoxContainer" parent="Layout/Footer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 2
+
+[node name="Load" type="Button" parent="Layout/Footer/FileActions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_07tfa")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Load"
+
+[node name="Save" type="Button" parent="Layout/Footer/FileActions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_m8sed")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Save"

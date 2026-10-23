@@ -1,0 +1,69 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/ui/GameSavesDialog.cs" id="1_oan7x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hqkq"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.25882354, 0.19607843, 0.32941177, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cu2m"]
+bg_color = Color(0.8745098, 0.81960785, 0.91764706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0pvd8"]
+bg_color = Color(0.1764706, 0.105882354, 0.30588236, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0fnn4"]
+bg_color = Color(0.1764706, 0.105882354, 0.30588236, 1)
+
+[node name="GameSaves" type="Window"]
+title = "Game Saves"
+size = Vector2i(800, 450)
+visible = false
+transient = true
+exclusive = true
+script = ExtResource("1_oan7x")
+
+[node name="Background" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8hqkq")
+
+[node name="Layout" type="VBoxContainer" parent="Background"]
+layout_mode = 2
+
+[node name="Columns" type="Label" parent="Background/Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Name                                           Modified"
+
+[node name="Saves" type="ItemList" parent="Background/Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_5cu2m")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="Buttons" type="HBoxContainer" parent="Background/Layout"]
+layout_mode = 2
+alignment = 2
+
+[node name="LoadSave" type="Button" parent="Background/Layout/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0pvd8")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Load"
+
+[node name="CloseSaves" type="Button" parent="Background/Layout/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0fnn4")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Close"

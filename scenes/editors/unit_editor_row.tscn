@@ -1,0 +1,59 @@
+[gd_scene format=3]
+
+[sub_resource type="StyleBoxFlat" id="Stripe"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="Cell"]
+bg_color = Color(0, 0, 0, 0)
+
+[node name="UnitRow" type="PanelContainer"]
+theme_override_styles/panel = SubResource("Stripe")
+
+[node name="Cells" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitName" type="Label" parent="Cells"]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+clip_text = true
+
+[node name="Price" type="LineEdit" parent="Cells"]
+custom_minimum_size = Vector2(80, 32)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Cell")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="HP" type="LineEdit" parent="Cells"]
+custom_minimum_size = Vector2(60, 32)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Cell")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="DMG" type="LineEdit" parent="Cells"]
+custom_minimum_size = Vector2(60, 32)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Cell")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="Range" type="LineEdit" parent="Cells"]
+custom_minimum_size = Vector2(60, 32)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Cell")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="Speed" type="LineEdit" parent="Cells"]
+custom_minimum_size = Vector2(60, 32)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Cell")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="Armored" type="CheckBox" parent="Cells"]
+custom_minimum_size = Vector2(80, 32)
+layout_mode = 2
+
+[node name="Special" type="OptionButton" parent="Cells"]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+fit_to_longest_item = false

@@ -1,6 +1,63 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3]
 
 [ext_resource type="Script" path="res://src/ui/NewGameSetup.cs" id="1_setup"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wji6y"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.3137255, 0.3019608, 0.56078434, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_anjpf"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.25490198, 0.19215687, 0.3254902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vwm3s"]
+bg_color = Color(0.1764706, 0.105882354, 0.30588236, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7nc5x"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.96862745, 1, 0.9411765, 1)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_ttv5p"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_rynh5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u54u5"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6iqf"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.96862745, 1, 0.9411765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8sd8m"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8604"]
+bg_color = Color(0.827451, 0.79607844, 0.91764706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_be5ti"]
+bg_color = Color(0.827451, 0.79607844, 0.91764706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l3oa1"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.3137255, 0.3019608, 0.56078434, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ctx3"]
+bg_color = Color(0.84705883, 0.30980393, 0.2627451, 1)
 
 [node name="NewGameSetup" type="Control"]
 layout_mode = 3
@@ -10,3 +67,196 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_setup")
+
+[node name="Background" type="PanelContainer" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wji6y")
+
+[node name="Layout" type="VBoxContainer" parent="Background"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="Background/Layout"]
+custom_minimum_size = Vector2(0, 93)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_anjpf")
+
+[node name="TitleBar" type="HBoxContainer" parent="Background/Layout/Header"]
+layout_mode = 2
+
+[node name="Heading" type="Label" parent="Background/Layout/Header/TitleBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "New Game"
+
+[node name="Home" type="Button" parent="Background/Layout/Header/TitleBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_vwm3s")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Home"
+
+[node name="BodyMargin" type="MarginContainer" parent="Background/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Body" type="HBoxContainer" parent="Background/Layout/BodyMargin"]
+layout_mode = 2
+theme_override_constants/separation = 17
+
+[node name="OptionsPanel" type="PanelContainer" parent="Background/Layout/BodyMargin/Body"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7nc5x")
+
+[node name="Options" type="VBoxContainer" parent="Background/Layout/BodyMargin/Body/OptionsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="GameModeTitle" type="Label" parent="Background/Layout/BodyMargin/Body/OptionsPanel/Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Game Mode"
+
+[node name="KillCommander" type="CheckBox" parent="Background/Layout/BodyMargin/Body/OptionsPanel/Options"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+button_pressed = true
+button_group = SubResource("ButtonGroup_ttv5p")
+text = "Kill Commander"
+
+[node name="CommanderExplanation" type="Label" parent="Background/Layout/BodyMargin/Body/OptionsPanel/Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+text = "Win if you destroy the opponent commander unit."
+autowrap_mode = 3
+
+[node name="ContestExplanation" type="Label" parent="Background/Layout/BodyMargin/Body/OptionsPanel/Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+text = "Contest flags to get points; first to 100 wins."
+autowrap_mode = 3
+
+[node name="OptionsSeparator" type="HSeparator" parent="Background/Layout/BodyMargin/Body/OptionsPanel/Options"]
+layout_mode = 2
+
+[node name="UnitsTitle" type="Label" parent="Background/Layout/BodyMargin/Body/OptionsPanel/Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Units"
+
+[node name="DefaultUnits" type="CheckBox" parent="Background/Layout/BodyMargin/Body/OptionsPanel/Options"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+button_pressed = true
+button_group = SubResource("ButtonGroup_rynh5")
+text = "Default Units (DefaultUnits.csv)"
+
+[node name="CustomUnits" type="CheckBox" parent="Background/Layout/BodyMargin/Body/OptionsPanel/Options"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+button_group = SubResource("ButtonGroup_rynh5")
+text = "Custom Units (from Saves/Units)"
+
+[node name="UnitTemplates" type="OptionButton" parent="Background/Layout/BodyMargin/Body/OptionsPanel/Options"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_u54u5")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0.4, 0.4, 0.4, 1)
+disabled = true
+fit_to_longest_item = false
+
+[node name="TemplateTime" type="Label" parent="Background/Layout/BodyMargin/Body/OptionsPanel/Options"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="MapsPanel" type="PanelContainer" parent="Background/Layout/BodyMargin/Body"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_s6iqf")
+
+[node name="MapsColumn" type="VBoxContainer" parent="Background/Layout/BodyMargin/Body/MapsPanel"]
+layout_mode = 2
+
+[node name="MapsTitle" type="Label" parent="Background/Layout/BodyMargin/Body/MapsPanel/MapsColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Select Map"
+
+[node name="MapsFolder" type="Label" parent="Background/Layout/BodyMargin/Body/MapsPanel/MapsColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+text = "Maps folder: Saves/Maps"
+autowrap_mode = 3
+
+[node name="Maps" type="ItemList" parent="Background/Layout/BodyMargin/Body/MapsPanel/MapsColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_8sd8m")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_styles/selected = SubResource("StyleBoxFlat_c8604")
+theme_override_styles/selected_focus = SubResource("StyleBoxFlat_be5ti")
+
+[node name="Footer" type="PanelContainer" parent="Background/Layout"]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l3oa1")
+
+[node name="FooterRow" type="HBoxContainer" parent="Background/Layout/Footer"]
+layout_mode = 2
+
+[node name="Status" type="Label" parent="Background/Layout/Footer/FooterRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.6666667, 0.654902, 0.76862746, 1)
+text = "Select a game mode and a map."
+
+[node name="Play" type="Button" parent="Background/Layout/Footer/FooterRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_4ctx3")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Play"
