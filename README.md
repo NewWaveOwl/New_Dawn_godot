@@ -1,6 +1,6 @@
 # New Dawn
 
-New Dawn is a turn-based strategy game with hex-grid combat, resource
+New Dawn is a turn based strategy game with hex grid combat, resource
 management, and tools for creating maps and customizing units.
 
 It began as a college project created by **Artiom Sova and Matthew Buzzetti**
