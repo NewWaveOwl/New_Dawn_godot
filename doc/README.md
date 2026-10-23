@@ -3,6 +3,8 @@
 Store documentation for the Godot port here, including architecture notes,
 migration decisions, setup guides, and manual verification steps.
 
+- [Map editor port](map-editor.md): behavior, platform adaptations, and checks.
+
 - See the root [README](../README.md) for setup and the folder structure.
 - Follow the repository [port rules](../AGENTS.md) when changing legacy logic
   or preparing pull requests.

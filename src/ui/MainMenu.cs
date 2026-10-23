@@ -49,7 +49,8 @@ public partial class MainMenu : Control
             GetWindow().Mode = Window.ModeEnum.Maximized;
 
         GetNode<Button>("NewGame").Pressed += () => ShowPendingScreen("New Game");
-        GetNode<Button>("MapEditor").Pressed += () => ShowPendingScreen("Map Editor");
+        GetNode<Button>("MapEditor").Pressed += () =>
+            GetTree().ChangeSceneToFile("res://scenes/editors/map_editor.tscn");
         GetNode<Button>("UnitEditor").Pressed += () => ShowPendingScreen("Unit Editor");
         GetNode<Button>("HowToPlay").Pressed += ShowHowToPlay;
         GetNode<Button>("Exit").Pressed += () => GetTree().Quit();

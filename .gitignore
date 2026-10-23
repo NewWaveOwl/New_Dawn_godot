@@ -23,3 +23,8 @@ mono_crash.*.json
 
 # Godot may generate script IDs while scanning the preserved WPF archive.
 /new_dawn_legacy/**/*.cs.uid
+
+# Local game saves and standalone verification build outputs.
+/Saves/
+/tests/**/bin/
+/tests/**/obj/
