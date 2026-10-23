@@ -10,11 +10,18 @@ public partial class MapCanvas : Control
 {
     public const double HexSize = 16 * 3.0;
     public Tile.TerrainType SelectedTerrain { get; set; } = Tile.TerrainType.Field;
+    public bool PaintEnabled { get; set; } = true;
+    public Color CanvasBackground { get; set; } = new Color("D3CBEA");
+    public Func<Tile, Color?>? FillOverride { get; set; }
+    public Func<Tile, Color>? StrokeColor { get; set; }
+    public Func<Tile, float>? StrokeWidth { get; set; }
+    public event Action<Tile>? TileClicked;
     private Map? _map;
     private bool _isPainting;
     private readonly Dictionary<Tile, Vector2> _positions = new();
     private static readonly Dictionary<Tile.TerrainType, Texture2D?> Textures = new();
     private readonly Vector2[] _hex = BuildFlatTopHexGeometry(HexSize);
+    protected IReadOnlyDictionary<Tile, Vector2> TilePositions => _positions;
 
     public override void _Ready() => MouseExited += StopPainting;
 
@@ -45,7 +52,7 @@ public partial class MapCanvas : Control
 
     public override void _Draw()
     {
-        DrawRect(new Rect2(Vector2.Zero, Size), new Color("D3CBEA"));
+        DrawRect(new Rect2(Vector2.Zero, Size), CanvasBackground);
         // Cull to the scroll viewport; the map can contain 40,000 hexes.
         Rect2 visible = GetParent() is ScrollContainer scroll
             ? new Rect2(new Vector2(scroll.ScrollHorizontal, scroll.ScrollVertical), scroll.Size)
@@ -55,7 +62,9 @@ public partial class MapCanvas : Control
             var points = new Vector2[_hex.Length];
             for (int i = 0; i < points.Length; i++) points[i] = _hex[i] + pos;
             Texture2D? texture = TextureFor(tile.TileTerrainType);
-            if (texture == null) DrawColoredPolygon(points, new Color(235 / 255f, 235 / 255f, 235 / 255f));
+            Color? fill = FillOverride?.Invoke(tile);
+            if (fill.HasValue) DrawColoredPolygon(points, fill.Value);
+            else if (texture == null) DrawColoredPolygon(points, new Color(235 / 255f, 235 / 255f, 235 / 255f));
             else {
                 float width = 96, height = (float)(Math.Sqrt(3) * HexSize);
                 float scale = Math.Max(width / texture.GetWidth(), height / texture.GetHeight());
@@ -68,9 +77,12 @@ public partial class MapCanvas : Control
             var outline = new Vector2[7];
             Array.Copy(points, outline, 6);
             outline[6] = points[0];
-            DrawPolyline(outline, new Color("8C8C8C"), 1, true);
+            DrawPolyline(outline, StrokeColor?.Invoke(tile) ?? new Color("8C8C8C"), StrokeWidth?.Invoke(tile) ?? 1, true);
         }
+        DrawMapOverlays(visible);
     }
+
+    protected virtual void DrawMapOverlays(Rect2 visible) { }
 
     public override void _Process(double delta)
     {
@@ -91,6 +103,13 @@ public partial class MapCanvas : Control
 
     public override void _GuiInput(InputEvent input)
     {
+        if (!PaintEnabled) {
+            if (input is InputEventMouseButton { ButtonIndex: MouseButton.Left, Pressed: true } click) {
+                Tile? tile = TileAt(click.Position);
+                if (tile != null) { TileClicked?.Invoke(tile); AcceptEvent(); }
+            }
+            return;
+        }
         if (input is InputEventMouseButton button) {
             if (button.ButtonIndex == MouseButton.Left && button.Pressed) {
                 Tile? tile = TileAt(button.Position);

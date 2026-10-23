@@ -6,6 +6,7 @@ migration decisions, setup guides, and manual verification steps.
 - [Map editor port](map-editor.md): behavior, platform adaptations, and checks.
 - [Getting started](getting-started.md): setup, folder structure, and running the editors.
 - [Unit editor port](unit-editor.md): editing templates, preserved behavior, and checks.
+- [Setup and gameplay port](gameplay.md): starting matches, controls, saves, and preserved quirks.
 
 - See the root [README](../README.md) for the project overview.
 - Follow the repository [port rules](../AGENTS.md) when changing legacy logic
