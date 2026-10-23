@@ -51,7 +51,8 @@ public partial class MainMenu : Control
         GetNode<Button>("NewGame").Pressed += () => ShowPendingScreen("New Game");
         GetNode<Button>("MapEditor").Pressed += () =>
             GetTree().ChangeSceneToFile("res://scenes/editors/map_editor.tscn");
-        GetNode<Button>("UnitEditor").Pressed += () => ShowPendingScreen("Unit Editor");
+        GetNode<Button>("UnitEditor").Pressed += () =>
+            GetTree().ChangeSceneToFile("res://scenes/editors/unit_editor.tscn");
         GetNode<Button>("HowToPlay").Pressed += ShowHowToPlay;
         GetNode<Button>("Exit").Pressed += () => GetTree().Quit();
     }
