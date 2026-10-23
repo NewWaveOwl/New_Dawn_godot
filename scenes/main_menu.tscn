@@ -1,0 +1,98 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/MainMenu.cs" id="1_menu"]
+[ext_resource type="Texture2D" path="res://new_dawn_legacy/NewDawn/Assets/UI/NewDawn_Title.png" id="2_title"]
+
+[sub_resource type="StyleBoxFlat" id="Style_button"]
+bg_color = Color(0.1764706, 0.1058824, 0.3058824, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.44, 0.44, 0.44, 1)
+
+[sub_resource type="Theme" id="Theme_menu"]
+Button/colors/font_color = Color(0.9411765, 0.9019608, 0.5490196, 1)
+Button/colors/font_hover_color = Color(0.9411765, 0.9019608, 0.5490196, 1)
+Button/colors/font_pressed_color = Color(0.9411765, 0.9019608, 0.5490196, 1)
+Button/styles/normal = SubResource("Style_button")
+Button/styles/hover = SubResource("Style_button")
+Button/styles/pressed = SubResource("Style_button")
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_menu")
+script = ExtResource("1_menu")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_title")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="DimOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.2)
+
+[node name="NewGame" type="Button" parent="."]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 563.0
+offset_right = 564.0
+offset_bottom = 642.0
+theme_override_font_sizes/font_size = 46
+text = "New Game"
+
+[node name="HowToPlay" type="Button" parent="."]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 677.0
+offset_right = 487.0
+offset_bottom = 733.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 32
+text = "How to Play"
+
+[node name="MapEditor" type="Button" parent="."]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 738.0
+offset_right = 487.0
+offset_bottom = 795.0
+theme_override_font_sizes/font_size = 32
+text = "Map Editor"
+
+[node name="UnitEditor" type="Button" parent="."]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 800.0
+offset_right = 486.0
+offset_bottom = 856.0
+theme_override_font_sizes/font_size = 32
+text = "Unit Editor"
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 861.0
+offset_right = 487.0
+offset_bottom = 918.0
+theme_override_font_sizes/font_size = 32
+text = "Exit"

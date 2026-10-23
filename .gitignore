@@ -20,3 +20,6 @@ mono_crash.*.json
 # Uncomment if your project does not version PCK files as runtime dependencies.
 # *.pck
 /android/
+
+# Godot may generate script IDs while scanning the preserved WPF archive.
+/new_dawn_legacy/**/*.cs.uid
