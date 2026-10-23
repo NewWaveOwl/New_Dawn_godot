@@ -50,6 +50,7 @@ assets/
     sounds/           Sound effects
 lib/                  Manually included third-party libraries
 addons/               Godot editor and runtime plugins
+doc/                  Documentation for the Godot port
 new_dawn_legacy/      Reference archive, excluded from Godot imports
 ```
 
@@ -64,3 +65,6 @@ its matching `assets/` subfolder. Empty planned folders contain `.gitkeep` so
 they survive checkout. Use NuGet package references in `NewDawn.csproj` for
 package-managed libraries; reserve `lib/` for manually included dependencies
 and `addons/` for Godot plugins. No libraries or plugins are added yet.
+
+Store port documentation in [`doc/`](doc/README.md). Original documentation
+remains in the legacy archive for reference.
