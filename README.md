@@ -16,9 +16,9 @@ The menu reuses the legacy title image, button labels, positions, colors, and
 with the window, using letterboxing to keep every button visible.
 
 **How to Play** shows the original help text without corrections, and **Exit**
-closes the application. With the author's explicit approval, **New Game**,
-**Map Editor**, and **Unit Editor** temporarily display “This screen has not
-been ported yet.” Their destination screens are future ports.
+closes the application. **Map Editor** opens the ported terrain editor.
+With the author's explicit approval, **New Game** and **Unit Editor**
+temporarily display “This screen has not been ported yet.”
 
 The original WPF source remains in `new_dawn_legacy/`. The Godot C# project
 compiles only `src/`, keeping WPF code out of the game assembly.
@@ -68,3 +68,16 @@ and `addons/` for Godot plugins. No libraries or plugins are added yet.
 
 Store port documentation in [`doc/`](doc/README.md). Original documentation
 remains in the legacy archive for reference.
+
+## Map editor
+
+Choose **Map Editor** from the main menu or open
+`scenes/editors/map_editor.tscn`. Select a terrain in the palette, then click
+or drag with the left mouse button to paint. Right-click paints Mountain.
+Use the grid inputs and **Create** to replace the map; **Save** writes the
+named map, **Load** loads a selected map or a typed name, and **Home** returns
+to the menu. The legacy editor does not prompt to save before Create or Home.
+
+Maps use the unchanged version-5 `.map` format and the legacy working-directory
+location `Saves/Maps`. See [map editor port notes](doc/map-editor.md) for
+preserved quirks, platform adaptations, and verification instructions.
