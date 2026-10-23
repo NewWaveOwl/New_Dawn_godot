@@ -21,5 +21,50 @@ closes the application. With the author's explicit approval, **New Game**,
 been ported yet.” Their destination screens are future ports.
 
 The original WPF source remains in `new_dawn_legacy/`. The Godot C# project
-compiles only `scripts/`, keeping WPF code out of the game assembly.
+compiles only `src/`, keeping WPF code out of the game assembly.
 See `AGENTS.md` for preservation and pull request approval rules.
+
+## Folder structure
+
+```text
+src/
+  config/             Configuration code
+  enums/              Enumerations
+  objects/            Game objects and models
+  states/             Game and interaction states
+  services/           Shared services
+  ui/                 C# scripts for user interface scenes
+scenes/
+  menus/              Main menu and other menu scenes
+  game/               Gameplay scenes
+  editors/            Map and unit editor scenes
+assets/
+  textures/
+    ui/               Interface images and icons
+    tiles/            Terrain textures
+    units/            Unit textures
+    buildings/        Building textures
+  fonts/              Font files
+  audio/
+    music/            Music tracks
+    sounds/           Sound effects
+lib/                  Manually included third-party libraries
+addons/               Godot editor and runtime plugins
+doc/                  Documentation for the Godot port
+new_dawn_legacy/      Reference archive, excluded from Godot imports
+```
+
+Open `scenes/menus/main_menu.tscn` to edit the current menu. Runtime scenes
+reference `src/` and `assets/`, never the legacy archive. Existing artwork was
+copied without changes into the matching texture folders; original files stay
+in the archive for reference. The archive's `.gdignore` prevents Godot from
+importing its files or including them as runtime resources.
+
+Keep C# code under `src/`, Godot scenes under `scenes/`, and each asset type in
+its matching `assets/` subfolder. Empty planned folders contain `.gitkeep` so
+they survive checkout. Use NuGet package references in `NewDawn.csproj` for
+package-managed libraries; reserve `lib/` for manually included dependencies
+and `addons/` for Godot plugins. No libraries or plugins are added yet.
+
+Store port documentation in [`doc/`](doc/README.md). Original documentation
+remains in the legacy archive for reference.

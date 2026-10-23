@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://scripts/MainMenu.cs" id="1_menu"]
-[ext_resource type="Texture2D" path="res://new_dawn_legacy/NewDawn/Assets/UI/NewDawn_Title.png" id="2_title"]
+[ext_resource type="Script" path="res://src/ui/MainMenu.cs" id="1_menu"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/NewDawn_Title.png" id="2_title"]
 
 [sub_resource type="StyleBoxFlat" id="Style_button"]
 bg_color = Color(0.1764706, 0.1058824, 0.3058824, 1)

@@ -7,6 +7,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- The preserved WPF project must not be compiled into the Godot game. -->
-    <Compile Include="scripts/**/*.cs" />
+    <Compile Include="src/**/*.cs" />
   </ItemGroup>
 </Project>
