@@ -48,7 +48,8 @@ public partial class MainMenu : Control
         if (!DisplayServer.GetName().Equals("headless"))
             GetWindow().Mode = Window.ModeEnum.Maximized;
 
-        GetNode<Button>("NewGame").Pressed += () => ShowPendingScreen("New Game");
+        GetNode<Button>("NewGame").Pressed += () =>
+            GetTree().ChangeSceneToFile("res://scenes/menus/new_game_setup.tscn");
         GetNode<Button>("MapEditor").Pressed += () =>
             GetTree().ChangeSceneToFile("res://scenes/editors/map_editor.tscn");
         GetNode<Button>("UnitEditor").Pressed += () =>

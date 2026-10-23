@@ -17,9 +17,8 @@ with the window, using letterboxing to keep every button visible.
 
 **How to Play** shows the original help text without corrections, and **Exit**
 closes the application. **Map Editor** opens the terrain editor, and
-**Unit Editor** opens the unit template editor.
-With the author's explicit approval, **New Game**
-temporarily displays “This screen has not been ported yet.”
+**Unit Editor** opens the unit template editor. **New Game** opens setup;
+select a saved map and choose Play to start a two-player match.
 
 The original WPF source remains in `new_dawn_legacy/`. The Godot C# project
 compiles only `src/`, keeping WPF code out of the game assembly.
