@@ -1,6 +1,73 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3]
 
 [ext_resource type="Script" path="res://src/ui/MapEditor.cs" id="1_editor"]
+[ext_resource type="Script" path="res://src/ui/MapCanvas.cs" id="2_qbb6l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpnlt"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.36078432, 0.22352941, 0.67058825, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4w0t"]
+bg_color = Color(0.1764706, 0.105882354, 0.30588236, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_plmvl"]
+bg_color = Color(0.1764706, 0.105882354, 0.30588236, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4ptb"]
+bg_color = Color(0.1764706, 0.105882354, 0.30588236, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s4xf7"]
+bg_color = Color(0.1764706, 0.105882354, 0.30588236, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0uc2m"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.85490197, 0.6509804, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6qai"]
+bg_color = Color(0.6901961, 0.63529414, 0.9019608, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ckv6u"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.38039216, 0.27058825, 0.5882353, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4604"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.6392157, 0.30588236, 0.8, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tpohs"]
+bg_color = Color(0.7372549, 0.7019608, 0.8784314, 1)
 
 [node name="MapEditor" type="Control"]
 layout_mode = 3
@@ -10,3 +77,148 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_editor")
+
+[node name="Layout" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/separation = 0
+
+[node name="ToolbarPanel" type="PanelContainer" parent="Layout"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xpnlt")
+
+[node name="Toolbar" type="HBoxContainer" parent="Layout/ToolbarPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Save" type="Button" parent="Layout/ToolbarPanel/Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_r4w0t")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Save"
+
+[node name="Load" type="Button" parent="Layout/ToolbarPanel/Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_plmvl")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Load"
+
+[node name="Home" type="Button" parent="Layout/ToolbarPanel/Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_h4ptb")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Home"
+
+[node name="ToolbarGap" type="Control" parent="Layout/ToolbarPanel/Toolbar"]
+custom_minimum_size = Vector2(17, 0)
+layout_mode = 2
+
+[node name="MapNameTitle" type="Label" parent="Layout/ToolbarPanel/Toolbar"]
+layout_mode = 2
+text = "Map name:"
+
+[node name="MapName" type="LineEdit" parent="Layout/ToolbarPanel/Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+
+[node name="ToolbarSpacer" type="Control" parent="Layout/ToolbarPanel/Toolbar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GridSizeTitle" type="Label" parent="Layout/ToolbarPanel/Toolbar"]
+layout_mode = 2
+text = "Grid size:"
+
+[node name="GridWidth" type="LineEdit" parent="Layout/ToolbarPanel/Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = "12"
+
+[node name="GridSeparator" type="Label" parent="Layout/ToolbarPanel/Toolbar"]
+layout_mode = 2
+text = "x"
+
+[node name="GridHeight" type="LineEdit" parent="Layout/ToolbarPanel/Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = "8"
+
+[node name="Create" type="Button" parent="Layout/ToolbarPanel/Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 40)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_s4xf7")
+theme_override_colors/font_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
+text = "Create"
+
+[node name="Body" type="HBoxContainer" parent="Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="MapListPanel" type="PanelContainer" parent="Layout/Body"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0uc2m")
+
+[node name="MapListColumn" type="VBoxContainer" parent="Layout/Body/MapListPanel"]
+layout_mode = 2
+
+[node name="MapListTitle" type="Label" parent="Layout/Body/MapListPanel/MapListColumn"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "Map list"
+
+[node name="MapList" type="ItemList" parent="Layout/Body/MapListPanel/MapListColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_p6qai")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="MapPanel" type="PanelContainer" parent="Layout/Body"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ckv6u")
+
+[node name="MapScroll" type="ScrollContainer" parent="Layout/Body/MapPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MapCanvas" type="Control" parent="Layout/Body/MapPanel/MapScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("2_qbb6l")
+
+[node name="PalettePanel" type="PanelContainer" parent="Layout/Body"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k4604")
+
+[node name="PaletteColumn" type="VBoxContainer" parent="Layout/Body/PalettePanel"]
+layout_mode = 2
+
+[node name="PaletteTitle" type="Label" parent="Layout/Body/PalettePanel/PaletteColumn"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "Palette"
+
+[node name="Palette" type="ItemList" parent="Layout/Body/PalettePanel/PaletteColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_tpohs")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+fixed_icon_size = Vector2i(24, 24)

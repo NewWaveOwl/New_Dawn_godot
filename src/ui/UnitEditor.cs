@@ -13,86 +13,22 @@ public partial class UnitEditor : Control
     private UnitEditorData _data = null!;
     private VBoxContainer _rows = null!;
     private readonly List<Action> _commitCells = new();
-    private static readonly string[] Headers = { "Unit Name", "Price", "HP", "DMG", "Range", "Speed", "Armored", "Special" };
-    private static readonly int[] Widths = { 120, 80, 60, 60, 60, 60, 80, 120 };
 
     public override void _Ready()
     {
-        Theme = new Theme { DefaultFontSize = 12 };
         GetWindow().Title = "Unit Editor";
         if (DisplayServer.GetName() != "headless") GetWindow().Mode = Window.ModeEnum.Maximized;
         _data = new UnitEditorData();
-        BuildControls();
+        BindControls();
         PopulateRows();
     }
 
-    private static PanelContainer Panel(string color, int padding = 0)
+    private void BindControls()
     {
-        var panel = new PanelContainer();
-        var style = new StyleBoxFlat { BgColor = new Color(color),
-            ContentMarginLeft = padding, ContentMarginRight = padding,
-            ContentMarginTop = padding, ContentMarginBottom = padding };
-        panel.AddThemeStyleboxOverride("panel", style);
-        return panel;
-    }
-
-    private static Button MakeButton(string name, string label, Action action, int width = 100, int height = 50)
-    {
-        var button = new Button { Name = name, Text = label, CustomMinimumSize = new Vector2(width, height) };
-        var style = new StyleBoxFlat { BgColor = new Color("2D1B4E"), BorderColor = new Color("888888") };
-        style.SetBorderWidthAll(1);
-        button.AddThemeStyleboxOverride("normal", style);
-        button.AddThemeColorOverride("font_color", new Color("F0E68C"));
-        button.Pressed += action;
-        return button;
-    }
-
-    private void BuildControls()
-    {
-        var layout = new VBoxContainer { Name = "Layout" };
-        AddChild(layout);
-        layout.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
-        layout.AddThemeConstantOverride("separation", 0);
-        var top = Panel("5C39AB", 10);
-        top.CustomMinimumSize = new Vector2(0, 50);
-        layout.AddChild(top);
-        var title = new HBoxContainer();
-        top.AddChild(title);
-        var heading = new Label { Text = "Unit Editor", SizeFlagsHorizontal = SizeFlags.ExpandFill };
-        heading.AddThemeFontSizeOverride("font_size", 20);
-        title.AddChild(heading);
-        title.AddChild(MakeButton("Home", "Home", AskGoHome, 60, 35));
-
-        var body = Panel("DAA6FF", 20);
-        body.SizeFlagsVertical = SizeFlags.ExpandFill;
-        layout.AddChild(body);
-        var tablePanel = Panel("D3CBEA");
-        body.AddChild(tablePanel);
-        var scroll = new ScrollContainer { Name = "TableScroll" };
-        tablePanel.AddChild(scroll);
-        var table = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill };
-        table.AddThemeConstantOverride("separation", 0);
-        scroll.AddChild(table);
-        var header = new HBoxContainer();
-        header.AddThemeConstantOverride("separation", 0);
-        table.AddChild(header);
-        for (int i = 0; i < Headers.Length; i++) {
-            var cell = Panel("E8E8E8", 3);
-            cell.CustomMinimumSize = new Vector2(Widths[i], 32);
-            cell.AddChild(new Label { Text = Headers[i], Modulate = Colors.Black });
-            header.AddChild(cell);
-        }
-        _rows = new VBoxContainer { Name = "Rows" };
-        _rows.AddThemeConstantOverride("separation", 0);
-        table.AddChild(_rows);
-        var bottom = Panel("46288A", 15);
-        bottom.CustomMinimumSize = new Vector2(0, 80);
-        layout.AddChild(bottom);
-        var buttons = new HBoxContainer { Alignment = BoxContainer.AlignmentMode.End };
-        buttons.AddThemeConstantOverride("separation", 15);
-        bottom.AddChild(buttons);
-        buttons.AddChild(MakeButton("Load", "Load", OpenLoadDialog));
-        buttons.AddChild(MakeButton("Save", "Save", () => OpenSaveDialog(false)));
+        _rows = GetNode<VBoxContainer>("%Rows");
+        GetNode<Button>("%Home").Pressed += AskGoHome;
+        GetNode<Button>("%Load").Pressed += OpenLoadDialog;
+        GetNode<Button>("%Save").Pressed += () => OpenSaveDialog(false);
     }
 
     private void PopulateRows()
@@ -101,40 +37,35 @@ public partial class UnitEditor : Control
         _commitCells.Clear();
         for (int index = 0; index < _data.Rows.Count; index++) {
             UnitRow row = _data.Rows[index];
-            var panel = Panel(index % 2 == 0 ? "FFFFFF" : "F9F9F9");
+            var panel = GD.Load<PackedScene>("res://scenes/editors/unit_editor_row.tscn").Instantiate<PanelContainer>();
             panel.Name = $"Row{index}";
+            var stripe = (StyleBoxFlat)panel.GetThemeStylebox("panel").Duplicate();
+            stripe.BgColor = new Color(index % 2 == 0 ? "FFFFFF" : "F9F9F9");
+            panel.AddThemeStyleboxOverride("panel", stripe);
             _rows.AddChild(panel);
-            var cells = new HBoxContainer { Name = "Cells" };
-            cells.AddThemeConstantOverride("separation", 0);
-            panel.AddChild(cells);
-            cells.AddChild(new Label { Name = "UnitName", Text = row.Name,
-                CustomMinimumSize = new Vector2(120, 32), Modulate = Colors.Black,
-                ClipText = true, TooltipText = row.Name });
-            NumericCell(cells, "Price", 80, () => row.PriceAlloy, value => row.PriceAlloy = value, true);
-            NumericCell(cells, "HP", 60, () => row.HP, value => row.HP = value);
-            NumericCell(cells, "DMG", 60, () => row.Damage, value => row.Damage = value);
-            NumericCell(cells, "Range", 60, () => row.Range, value => row.Range = value);
-            NumericCell(cells, "Speed", 60, () => row.Speed, value => row.Speed = value);
-            var armored = new CheckBox { Name = "Armored", ButtonPressed = row.Armored,
-                CustomMinimumSize = new Vector2(80, 32) };
-            cells.AddChild(armored);
+            var cells = panel.GetNode<HBoxContainer>("Cells");
+            var unitName = cells.GetNode<Label>("UnitName");
+            unitName.Text = row.Name;
+            unitName.TooltipText = row.Name;
+            NumericCell(cells, "Price", () => row.PriceAlloy, value => row.PriceAlloy = value, true);
+            NumericCell(cells, "HP", () => row.HP, value => row.HP = value);
+            NumericCell(cells, "DMG", () => row.Damage, value => row.Damage = value);
+            NumericCell(cells, "Range", () => row.Range, value => row.Range = value);
+            NumericCell(cells, "Speed", () => row.Speed, value => row.Speed = value);
+            var armored = cells.GetNode<CheckBox>("Armored");
+            armored.ButtonPressed = row.Armored;
             armored.Toggled += value => row.Armored = value;
-            var core = new OptionButton { Name = "Special", FitToLongestItem = false,
-                CustomMinimumSize = new Vector2(120, 32) };
+            var core = cells.GetNode<OptionButton>("Special");
             foreach (Unit.Core value in row.CoreTypes) core.AddItem(value.ToString(), (int)value);
             core.Select(row.CoreTypes.IndexOf(row.CoreType));
             core.ItemSelected += selected => row.CoreType = (Unit.Core)core.GetItemId((int)selected);
-            cells.AddChild(core);
         }
     }
 
-    private void NumericCell(HBoxContainer parent, string name, int width, Func<int> get, Action<int> set, bool immediate = false)
+    private void NumericCell(HBoxContainer parent, string name, Func<int> get, Action<int> set, bool immediate = false)
     {
-        var entry = new LineEdit { Name = name, Text = get().ToString(),
-            CustomMinimumSize = new Vector2(width, 32), ExpandToTextLength = false };
-        entry.AddThemeStyleboxOverride("normal", new StyleBoxFlat { BgColor = Colors.Transparent });
-        entry.AddThemeColorOverride("font_color", Colors.Black);
-        parent.AddChild(entry);
+        var entry = parent.GetNode<LineEdit>(name);
+        entry.Text = get().ToString();
         void Commit() {
             if (int.TryParse(entry.Text, out int value)) {
                 set(value);

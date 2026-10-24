@@ -12,26 +12,9 @@ public partial class GameSavesDialog : Window
     private ItemList _saves = null!;
     private string[] _files = Array.Empty<string>();
 
-    public GameSavesDialog()
-    {
-        Name = "GameSaves";
-        Title = "Game Saves";
-        Exclusive = true;
-        Transient = true;
-    }
-
     public override void _Ready()
     {
-        var panel = GameUi.Panel("423254", 12);
-        AddChild(panel);
-        panel.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.FullRect);
-        var layout = new VBoxContainer();
-        panel.AddChild(layout);
-        layout.AddChild(GameUi.Label("Name                                           Modified", 16));
-        _saves = new ItemList { Name = "Saves", SizeFlagsVertical = Control.SizeFlags.ExpandFill };
-        _saves.AddThemeStyleboxOverride("panel", new StyleBoxFlat { BgColor = new Color("DFD1EA") });
-        _saves.AddThemeColorOverride("font_color", Colors.Black);
-        layout.AddChild(_saves);
+        _saves = GetNode<ItemList>("%Saves");
         string dir = Path.Combine(System.Environment.CurrentDirectory, "Saves", "GameSaves");
         if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
         _files = Directory.GetFiles(dir, "*" + SaveAndLoaderHandler.gameSaveExtention, SearchOption.TopDirectoryOnly);
@@ -41,10 +24,8 @@ public partial class GameSavesDialog : Window
             _saves.AddItem($"{Path.GetFileNameWithoutExtension(info.Name)}    {info.LastWriteTime:yyyy-MM-dd HH:mm}");
         }
         _saves.ItemActivated += _ => LoadSelected();
-        var buttons = new HBoxContainer { Alignment = BoxContainer.AlignmentMode.End };
-        layout.AddChild(buttons);
-        buttons.AddChild(GameUi.Button("LoadSave", "Load", LoadSelected));
-        buttons.AddChild(GameUi.Button("CloseSaves", "Close", QueueFree));
+        GetNode<Button>("%LoadSave").Pressed += LoadSelected;
+        GetNode<Button>("%CloseSaves").Pressed += QueueFree;
         CloseRequested += QueueFree;
     }
 

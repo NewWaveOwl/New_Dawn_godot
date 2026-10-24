@@ -13,3 +13,4 @@ migration decisions, setup guides, and manual verification steps.
   or preparing pull requests.
 - Original project documents remain in `new_dawn_legacy/Documents/` as
   reference material. Add documentation for the port here.
+- [Editable UI scenes](ui-scenes.md): visual editing, C# bindings, and runtime content.
